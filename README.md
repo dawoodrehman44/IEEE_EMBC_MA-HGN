@@ -51,9 +51,9 @@ MA-HGN independently identified 6 clinically validated COVID-19 markers through 
 | **CD_IgA** | #1 | Antibody response | Known COVID marker |
 | **CD45** | #2 | Pan-leukocyte activation | Known COVID marker |
 | **CD3** | #3 | T-cell identification | Known COVID marker |
-| **CD11c** | #6 | Myeloid cell marker | Known COVID marker |
-| **CD16** | #7 | NK cell/neutrophil marker | Known COVID marker |
-| **CD45RA** | #9 | Naive vs. memory T-cells | Known COVID marker |
+| **CD11c** | #4 | Myeloid cell marker | Known COVID marker |
+| **CD16** | #5 | NK cell/neutrophil marker | Known COVID marker |
+| **CD45RA** | #6 | Naive vs. memory T-cells | Known COVID marker |
 
 ---
 
