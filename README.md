@@ -1,7 +1,7 @@
 # Memory-Augmented Hierarchical Graph Networks for Interpretable Flow Cytometry Classification
 
 <p align="center">
-  <img src="Figures/MA-HGN_Architectural_Plot.pdf" alt="MA-HGN Framework Architecture" width="1000"/>
+  <img src="Figures/MA-HGN_Architectural_Plot.png" alt="MA-HGN Framework Architecture" width="1000"/>
 </p>
 ---
 
