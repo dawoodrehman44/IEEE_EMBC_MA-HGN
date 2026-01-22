@@ -103,7 +103,7 @@ pip install -r requirements.txt
 ```
 
 ## Training
-### Train the UAM_CXR Framework
+### Train the MA-HGN Framework
 ```bash
 python main.py \
     --model train \
