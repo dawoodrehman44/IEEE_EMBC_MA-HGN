@@ -1,43 +1,60 @@
-# UAM-CXR: Uncertainty-Aware Multimodal Learning for Chest X-ray Classification via Cross-Modal Conformal Prediction
+# Memory-Augmented Hierarchical Graph Networks for Interpretable Flow Cytometry Classification
 
 <p align="center">
-  <img src="Figures/UAM_CXR_Architecture_Plot.png" alt="UAM-CXR Framework Architecture" width="1000"/>
+  <img src="Figures/MA-HGN Architectural Plot.pdf" alt="MA-HGN Framework Architecture" width="1000"/>
 </p>
----
-
-## 🔥 Highlights
-- **First end-to-end trainable framework** combining focal loss, class weighting, and learnable conformal prediction for medical imaging.
-- **Cross-modal conformal scoring** using vision + text features (unlike vision-only baselines).
-- **Mathematically guarantee 90% coverage** with efficient 2-3 disease prediction sets. 
-- **Comprehensive uncertainty quantification:** Aleatoric + Epistemic + Calibration + Conformal. 
-- **State-of-the-art performance:** AUC 0.92-0.96, outperforming strong baselines. 
-- **Joint Optimaztion** Classification, contrastive alignment, uncertainty estimation, and conformal scoring trained together.  
 
 ---
 
-## 📋 Abstract
-### Problem 
+## 🔬 Overview
 
-- Existing models lack uncertainty quanitification for safe clinical deployment.  
-- No mathematical guarantees on prediction reliability.
+Flow cytometry generates high-dimensional single-cell measurements but requires expert manual analysis. Existing machine learning approaches treat cells independently, ignoring biological hierarchies and population-level interactions. 
 
-**Key Innovation**:
-1. **Uncertainty-Aware Classification with Focal Loss** 
-2. **Contrastive Vision-text Alignment** 
-3. **Learnable Conformal Prediction** 
-4. **End-to-end Joint Optimization**
+**MA-HGN addresses this by:**
+- 🧠 **Memory Bank**: Learning prototypical immune cell population signatures
+- 🕸️ **Graph Neural Networks**: Modeling cell-cell phenotypic relationships via k-NN graphs
+- 🏗️ **Hierarchical Aggregation**: Reasoning across 4 biological scales (cells → clusters → lineages → sample)
+- ⚡ **Adaptive Fusion**: Automatically emphasizing the most diagnostic scale per sample
 
 ---
 
-## 🏗️ Architecture Overview
+## 🎯 Key Features
 
-Our framework consists of these critical components:
+- **State-of-the-Art Performance**: 90.5±3.8% mean accuracy across 3 datasets  
+- **Cross-Disease Generalization**: Validates on COVID-19 (2 cohorts) and lupus nephritis  
+- **Biomarker Discovery**: Independently identifies 6 clinically validated COVID-19 markers  
+- **Interpretability**: Visualizes prototypes, hierarchical attention, and graph topology  
+- **Computational Efficiency**: <300ms inference for 100,000 cells (near-linear complexity)  
+- **Public Data**: Reproducible experiments on ImmPort datasets (SDY2011, SDY1708, SDY997)
 
-1. **Dual Encoding**: Vision Encoder + Text Encoder (Both Trainable).
-2. **Contrastive Alignment**: Align vision and text in shared semantic space with InfoNCE loss. 
-3. **Cross-Modal Fusion**: Aligned features v and t.
-4. **Dual-Head Prediction**: Shared backbone, Classification head, Uncertainty Head (All trainable).
-5. **Learnable Conformal Scoring**: Learn to identify unreliable predictions using all modalities.
+---
+
+## 🏗️ Architecture
+
+**Input:** Variable-sized cell populations (N × 68 markers)  
+**Output:** Binary disease classification + interpretable prototypes
+
+**Pipeline:**
+1. 🔄 **Set Transformer** → Permutation-invariant cell encoding  
+2. 🧠 **Memory Bank** → 200 prototypes learn population signatures  
+3. 🕸️ **Graph NN** → k-NN graphs capture cell-cell interactions  
+4. 🏗️ **Hierarchy** → Aggregate across cells/clusters/lineages/sample  
+5. ⚡ **Adaptive Fusion** → Attention-weighted combination → Classification
+
+---
+
+## 🧬 Discovered Biomarkers
+
+MA-HGN independently identified 6 clinically validated COVID-19 markers through gradient-based feature importance:
+
+| Marker | Rank | Biological Role | Clinical Validation |
+|--------|------|----------------|---------------------|
+| **CD_IgA** | #1 | Antibody response | Known COVID marker |
+| **CD45** | #2 | Pan-leukocyte activation | Known COVID marker |
+| **CD3** | #3 | T-cell identification | Known COVID marker |
+| **CD11c** | #6 | Myeloid cell marker | Known COVID marker |
+| **CD16** | #7 | NK cell/neutrophil marker | Known COVID marker |
+| **CD45RA** | #9 | Naive vs. memory T-cells | Known COVID marker |
 
 ---
 
@@ -45,22 +62,20 @@ Our framework consists of these critical components:
 ```bash
 ├── Configuration/
 │   └── configuration.json           
-├── Data_Processing/
+├── Data Processing/
 │   └── data_processing.py              
-├── Evaluation_Metrics/
+├── Evaluation Metrics/
 │   └── evaluation_metrics.py   
 ├── Experiments/
-│   ├── Comparative_Case_Study_Analysis.py
-│   └── Uncertainty_Analysis.py
+│   ├── ablation.py
+│   └── qualitative_experiments.py
 ├── Figures/
-│   └── UAM_CXR_Architecture_Plot.pdf
+│   └── MA-HGN Architectural Plot.pdf
 ├── Model/
-│   ├── loss_function.py
+│   ├── loss.py
 │   └── model.py                  
 ├── Visualization/
-│   ├── metrics_tracker.py                
-│   ├── calibration.py                     
-│   └── variational_linear.py           
+│   └── training_plots.py           
 ├── main.py
 ├── train.py
 ├── valid.py                                 
@@ -75,14 +90,14 @@ Our framework consists of these critical components:
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/dawoodrehman44/IEEE-EMBC-Conference-UAM_CXR-Paper.git
+git clone https://github.com/dawoodrehman44/IEEE_EMBC_MA-HGN.git
 cd IEEE_EMBC_2026
 
 ```
 ### Create environment
 ```bash
-conda create -n UAM_CXR_med python=3.8
-conda activate UAM_CXR_med
+conda create -n MA-HGN_med python=3.8
+conda activate MA-HGN_med
 
 # Install dependencies
 pip install -r requirements.txt
@@ -99,16 +114,15 @@ python main.py \
 ```
 
 ## Testing
-### Perform comprehensive uncertainty and conforaml predeiction analysis
+### Perform Cell Embedding, Cluster Analysis, Prototypes_and_Marker_Analysis, Graph_Connection, and Hierarchy_Scale Analysis
 ```bash
-python Experiments/case_study_visualization.py \
+python Experiments/qualitative_experiments.py \
     --Experiments/ablation.py \
     --data_path /path/to/validation \
-    --mc_samples 1000
 ```
 
 ## 🤝 Acknowledgments
-We thank the creators of MIMIC-CXR and IU-Xray datasets and all the models used in this work, for making them publicly available to the community.
+We thank the creators of SDY2011, SDY997, SDY1708 and all the models used in this work, for making them publicly available to the community.
 
 ## Contact
 For questions or collaborations, please contact: 
