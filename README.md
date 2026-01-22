@@ -1,9 +1,8 @@
 # Memory-Augmented Hierarchical Graph Networks for Interpretable Flow Cytometry Classification
 
 <p align="center">
-  <img src="Figures/MA-HGN Architectural Plot.pdf" alt="MA-HGN Framework Architecture" width="1000"/>
+  <img src="Figures/MA-HGN_Architectural_Plot.pdf" alt="MA-HGN Framework Architecture" width="1000"/>
 </p>
-
 ---
 
 ## 🔬 Overview
@@ -122,7 +121,7 @@ python Experiments/qualitative_experiments.py \
 ```
 
 ## 🤝 Acknowledgments
-We thank the creators of SDY2011, SDY997, SDY1708 and all the models used in this work, for making them publicly available to the community.
+We thank the creators of SDY2011, SDY997, SDY1708 datasets, and all the models used in this work, for making them publicly available to the community.
 
 ## Contact
 For questions or collaborations, please contact: 
