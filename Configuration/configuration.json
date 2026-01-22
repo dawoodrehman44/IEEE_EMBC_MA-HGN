@@ -1,0 +1,28 @@
+# Get current dataset config
+    @classmethod
+    def get_config(cls):
+        return cls.DATASET_CONFIGS[""]
+    
+    # Training parameters
+    BATCH_SIZE = 8
+    EPOCHS = 300
+    LR = 1e-4
+    WEIGHT_DECAY = 1e-5
+    SEED = 42
+    
+    # Model architecture
+    MAX_CELLS = 5000
+    CELL_DIM = 128
+    POPULATION_DIM = 64
+    NUM_PROTOTYPES = 200
+    NUM_HEADS = 4
+    K_NEIGHBORS = 10
+    HIERARCHY_LEVELS = 4
+    INPUT_DIM = None
+    # Loss weights
+    CONTRASTIVE_WEIGHT = 0.1
+    GRAPH_SMOOTH_WEIGHT = 0.005
+    HIERARCHY_WEIGHT = 0.005
+    
+    # Device
+    DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
